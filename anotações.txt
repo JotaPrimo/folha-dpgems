@@ -1,0 +1,2 @@
+As formulas não usam o mesmo arredondamento sempre
+Por precisão de cálculos devemos usar BigDecimal
