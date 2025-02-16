@@ -3,6 +3,6 @@ As formulas não usam o mesmo arredondamento sempre, exemplo dias trabalhados e v
 Por precisão de cálculos devemos usar BigDecimal, Svel usa double por padrão, o que gera imprecisão
 
 
-BaseEngine são sempre parecidas
+BaseEngine são sempre parecidas -> Testando isso, acho que deu certo com uma classe só
     o que muda é a forma de arredondamento, se vier como parametro pode ser possivel usar uma classe só
     precisão também muda

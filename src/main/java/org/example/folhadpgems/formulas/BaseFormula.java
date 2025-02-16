@@ -1,5 +1,6 @@
 package org.example.folhadpgems.formulas;
 
+import java.math.RoundingMode;
 import java.util.Map;
 
 public class BaseFormula {
@@ -8,15 +9,24 @@ public class BaseFormula {
     private String expressao;
     private String descricao;
     private Map<String, String> parametrosDefault;
+    private int scale;
+    private RoundingMode roundingMode;
 
     public BaseFormula() {
     }
 
-    public BaseFormula(String nome, String expressao, String descricao, Map<String, String> parametrosDefault) {
+    protected BaseFormula(int scale, RoundingMode roundingMode) {
+        this.scale = scale;
+        this.roundingMode = roundingMode;
+    }
+
+    public BaseFormula(String nome, String expressao, String descricao, Map<String, String> parametrosDefault, int scale, RoundingMode roundingMode) {
         this.nome = nome;
         this.expressao = expressao;
         this.descricao = descricao;
         this.parametrosDefault = parametrosDefault;
+        this.scale = scale;
+        this.roundingMode = roundingMode;
     }
 
     public String getNome() {
@@ -49,6 +59,22 @@ public class BaseFormula {
 
     public void setParametrosDefault(Map<String, String> parametrosDefault) {
         this.parametrosDefault = parametrosDefault;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public RoundingMode getRoundingMode() {
+        return roundingMode;
+    }
+
+    public void setRoundingMode(RoundingMode roundingMode) {
+        this.roundingMode = roundingMode;
     }
 
     @Override

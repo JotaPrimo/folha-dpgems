@@ -41,9 +41,9 @@ public class ServiceCalculo {
         baseFormulaDiasTrabalhadosAjustados.setExpressao(" ((DIAS_TRABALHADOS - DIAS_AFASTADOS) / DIAS_TOTAIS_DO_MES) * 30 ");
 
         HashMap<String, Object> hashMapDiasTrabalhadosAjustados = new HashMap<>();
-        hashMapDiasTrabalhadosAjustados.put("DIAS_TRABALHADOS", new BigDecimal(30));
+        hashMapDiasTrabalhadosAjustados.put("DIAS_TRABALHADOS", new BigDecimal(28));
         hashMapDiasTrabalhadosAjustados.put("DIAS_AFASTADOS", new BigDecimal(19));
-        hashMapDiasTrabalhadosAjustados.put("DIAS_TOTAIS_DO_MES", new BigDecimal(30));
+        hashMapDiasTrabalhadosAjustados.put("DIAS_TOTAIS_DO_MES", new BigDecimal(28));
 
 
         Object resultadoDiasTrabalhadosAjustados = baseFormulaEngine.evaluate(baseFormulaDiasTrabalhadosAjustados, hashMapDiasTrabalhadosAjustados);

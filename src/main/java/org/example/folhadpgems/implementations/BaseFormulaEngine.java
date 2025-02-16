@@ -18,7 +18,7 @@ public class BaseFormulaEngine implements IBaseFormulaEngine {
         Object resultado = MVEL.eval(baseFormula.getExpressao(), variables);
 
         if (resultado instanceof Number) {
-            return new BigDecimal(resultado.toString()).setScale(2, RoundingMode.HALF_UP);
+            return new BigDecimal(resultado.toString()).setScale(baseFormula.getScale(), baseFormula.getRoundingMode());
         }
         return resultado;
     }

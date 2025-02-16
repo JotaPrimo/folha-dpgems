@@ -11,16 +11,17 @@ import java.math.BigDecimal;
 public class Main {
     public static void main(String[] args) {
 
+        BaseFormulaEngine baseFormulaEngine = new BaseFormulaEngine();
         ServiceCalculo serviceCalculo = new ServiceCalculo();
 
-        serviceCalculo.setBaseFormulaEngine(new DiasTrabalhadosAjustadosEngine());
+        serviceCalculo.setBaseFormulaEngine(baseFormulaEngine);
         BigDecimal diasTrabalhados = serviceCalculo.diasTrabalhados();
 
 
-        serviceCalculo.setBaseFormulaEngine(new ValorDiarioEngine());
+        serviceCalculo.setBaseFormulaEngine(baseFormulaEngine);
         BigDecimal valorDiario = serviceCalculo.valorDiario();
 
-        serviceCalculo.setBaseFormulaEngine(new ValorTotalAcervoEngine());
+        serviceCalculo.setBaseFormulaEngine(baseFormulaEngine);
         serviceCalculo.valorTotalAcervo(diasTrabalhados, valorDiario);
     }
 }
