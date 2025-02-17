@@ -10,6 +10,8 @@ public class Main {
         BaseFormulaEngine baseFormulaEngine = new BaseFormulaEngine();
         ServiceCalculo serviceCalculo = new ServiceCalculo();
 
+        serviceCalculo.calcular();
+
         serviceCalculo.setBaseFormulaEngine(baseFormulaEngine);
         BigDecimal diasTrabalhados = serviceCalculo.diasTrabalhados();
 

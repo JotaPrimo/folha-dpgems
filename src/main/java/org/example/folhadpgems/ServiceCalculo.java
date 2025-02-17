@@ -8,6 +8,7 @@ import org.example.folhadpgems.formulas.ValorTotalAcervo;
 import org.example.folhadpgems.interfaces.IBaseFormulaEngine;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -29,6 +30,8 @@ public class ServiceCalculo {
         BaseFormula baseFormula = new BaseFormula();
         baseFormula.setDescricao("Calculo de salario");
         baseFormula.setExpressao(" (SALARIO_BASE / 30) * DIAS_TRABALHADOS ");
+        baseFormula.setScale(2);
+        baseFormula.setRoundingMode(RoundingMode.HALF_UP);
         baseFormula.setNome("Calcular salario");
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -76,7 +79,7 @@ public class ServiceCalculo {
     public BigDecimal valorTotalAcervo(BigDecimal diasTrabalhados,BigDecimal valorDiario) {
 
         Objects.requireNonNull(diasTrabalhados, "Valor de dias trabalhados NULL");
-        Objects.requireNonNull(valorDiario, "Valor diário não pode ser null");
+        Objects.requireNonNull(valorDiario, "Valor diario NULL");
 
         ValorTotalAcervo valorTotalAcervo = new ValorTotalAcervo();
         valorTotalAcervo.setNome("Valor Total Acervo");
