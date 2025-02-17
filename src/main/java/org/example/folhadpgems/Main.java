@@ -1,9 +1,5 @@
 package org.example.folhadpgems;
 
-import org.example.folhadpgems.implementations.DiasTrabalhadosAjustadosEngine;
-import org.example.folhadpgems.implementations.ValorDiarioEngine;
-import org.example.folhadpgems.implementations.ValorTotalAcervoEngine;
-import org.example.folhadpgems.interfaces.IBaseFormulaEngine;
 import org.example.folhadpgems.implementations.BaseFormulaEngine;
 
 import java.math.BigDecimal;

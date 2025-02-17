@@ -6,14 +6,17 @@ import org.mvel2.MVEL;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 public class BaseFormulaEngine implements IBaseFormulaEngine {
 
     @Override
     public Object evaluate(BaseFormula baseFormula, Map<String, Object> variables) {
+
+        Objects.requireNonNull(baseFormula, "Formúla não definida para cálculo");
+        Objects.requireNonNull(variables, "Parâmetros de cálculo não definidos");
 
         Object resultado = MVEL.eval(baseFormula.getExpressao(), variables);
 
