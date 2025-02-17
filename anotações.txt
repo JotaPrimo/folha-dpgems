@@ -1,8 +1,10 @@
-As formulas não usam o mesmo arredondamento sempre, exemplo dias trabalhados e valor diário
+As fÃ³rmulas nÃ£o usam o mesmo arredondamento sempre
+    exemplo: dias trabalhados e valor diÃ¡rio
 
-Por precisão de cálculos devemos usar BigDecimal, Svel usa double por padrão, o que gera imprecisão
+Por precisÃ£o de cÃ¡lculos devemos usar BigDecimal, Svel usa double por padrÃ£o, o que gera imprecisÃ£o
 
 
-BaseEngine são sempre parecidas -> Testando isso, acho que deu certo com uma classe só
-    o que muda é a forma de arredondamento, se vier como parametro pode ser possivel usar uma classe só
-    precisão também muda
+Todas as BaseEngine sÃ£o sempre parecidas
+    Testando isso, acho que deu certo com uma classe apenas
+    O que muda Ã© a forma de arredondamento, se vier como parÃ¢metro pode ser possÃ­vel usar uma classe apenas
+    precisÃ£o tambÃ©m muda

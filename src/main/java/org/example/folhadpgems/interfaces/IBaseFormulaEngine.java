@@ -6,11 +6,11 @@ import java.util.Map;
 
 public interface IBaseFormulaEngine {
     /**
-     * Avalia a expresso de uma dada frmula, com base em variveis passadas.
+     * Avalia a expresso de uma dada fórmula, com base em variáveis passadas.
      *
-     * @param baseFormula A entidade de domnio contendo a expresso
-     * @param variables Variveis (nome -> valor) necessrias para o clculo
-     * @return O resultado do clculo. Pode ser Double, BigDecimal, etc.
+     * @param baseFormula A entidade de domínio contendo a expressão
+     * @param variables Variáveis (nome -> valor) necessárias para o cálculo
+     * @return O resultado do cálculo. Pode ser deve BigDecimal.
      */
     Object evaluate(BaseFormula baseFormula, Map<String, Object> variables);
 }

@@ -1,6 +1,5 @@
 package org.example.folhadpgems;
 
-
 import org.example.folhadpgems.formulas.BaseFormula;
 import org.example.folhadpgems.formulas.DiasTrabalhadosAjustados;
 import org.example.folhadpgems.formulas.ValorDiario;
@@ -28,11 +27,11 @@ public class ServiceCalculo {
 
     public void calcular() {
         BaseFormula baseFormula = new BaseFormula();
-        baseFormula.setDescricao("Calculo de salario");
+        baseFormula.setDescricao("Calculo de salário");
         baseFormula.setExpressao(" (SALARIO_BASE / 30) * DIAS_TRABALHADOS ");
         baseFormula.setScale(2);
         baseFormula.setRoundingMode(RoundingMode.HALF_UP);
-        baseFormula.setNome("Calcular salario");
+        baseFormula.setNome("Calcular salário");
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("SALARIO_BASE", new BigDecimal(6350));
@@ -43,7 +42,6 @@ public class ServiceCalculo {
     }
 
     public BigDecimal diasTrabalhados() {
-
         BaseFormula diasTrabalhados = new DiasTrabalhadosAjustados();
         diasTrabalhados.setDescricao("Dias trabalhados ajustados");
         diasTrabalhados.setNome("Dias trabalhados ajustados");
@@ -62,8 +60,8 @@ public class ServiceCalculo {
 
     public BigDecimal valorDiario() {
         ValorDiario valorDiario = new ValorDiario();
-        valorDiario.setNome("Valor diario");
-        valorDiario.setDescricao("Valor diario");
+        valorDiario.setNome("Valor diário");
+        valorDiario.setDescricao("Valor diário");
         valorDiario.setExpressao("(SALARIO_BASE * PERCENTUAL_ACERVO) / 30");
 
         HashMap<String, Object> mapValorDiario = new HashMap<>();
@@ -76,9 +74,8 @@ public class ServiceCalculo {
     }
 
     public BigDecimal valorTotalAcervo(BigDecimal diasTrabalhados,BigDecimal valorDiario) {
-
         Objects.requireNonNull(diasTrabalhados, "Valor de dias trabalhados NULL");
-        Objects.requireNonNull(valorDiario, "Valor diario NULL");
+        Objects.requireNonNull(valorDiario, "Valor diário NULL");
 
         ValorTotalAcervo valorTotalAcervo = new ValorTotalAcervo();
         valorTotalAcervo.setNome("Valor Total Acervo");

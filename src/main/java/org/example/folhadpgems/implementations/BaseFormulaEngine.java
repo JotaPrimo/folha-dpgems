@@ -15,8 +15,8 @@ public class BaseFormulaEngine implements IBaseFormulaEngine {
     @Override
     public Object evaluate(BaseFormula baseFormula, Map<String, Object> variables) {
 
-        Objects.requireNonNull(baseFormula, "Form˙la n„o definida para c·lculo");
-        Objects.requireNonNull(variables, "Par‚metros de c·lculo n„o definidos");
+        Objects.requireNonNull(baseFormula, "F√≥rmula n√£o definida para c√°lculo");
+        Objects.requireNonNull(variables, "Par√¢metros de c√°lculo no definidos");
 
         Object resultado = MVEL.eval(baseFormula.getExpressao(), variables);
 
