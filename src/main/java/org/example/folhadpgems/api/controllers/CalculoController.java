@@ -30,9 +30,11 @@ public class CalculoController {
 
         String valorAcervo = serviceCalculo.valorTotalAcervo(diasTrabalhados, valorDiario).toString();
 
+        // todo: implementar responseDTO
         Map<String, Object> response = new HashMap<>();
+        response.put("parametros", parametros);
         response.put("response", valorAcervo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
