@@ -4,72 +4,48 @@ import org.example.folhadpgems.formulas.BaseFormula;
 import org.example.folhadpgems.formulas.DiasTrabalhadosAjustados;
 import org.example.folhadpgems.formulas.ValorDiario;
 import org.example.folhadpgems.formulas.ValorTotalAcervo;
+import org.example.folhadpgems.implementations.BaseFormulaEngine;
 import org.example.folhadpgems.interfaces.IBaseFormulaEngine;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+
+@Service
 public class ServiceCalculo {
 
     private IBaseFormulaEngine baseFormulaEngine;
 
-    public ServiceCalculo() { }
-
-    public IBaseFormulaEngine getBaseFormulaEngine() {
-        return baseFormulaEngine;
+    public ServiceCalculo() {
+        baseFormulaEngine = new BaseFormulaEngine();
     }
 
-    public void setBaseFormulaEngine(IBaseFormulaEngine baseFormulaEngine) {
-        this.baseFormulaEngine = baseFormulaEngine;
-    }
-
-    public void calcular() {
-        BaseFormula baseFormula = new BaseFormula();
-        baseFormula.setDescricao("Calculo de salário");
-        baseFormula.setExpressao(" (SALARIO_BASE / 30) * DIAS_TRABALHADOS ");
-        baseFormula.setScale(2);
-        baseFormula.setRoundingMode(RoundingMode.HALF_UP);
-        baseFormula.setNome("Calcular salário");
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("SALARIO_BASE", new BigDecimal(6350));
-        hashMap.put("DIAS_TRABALHADOS", new BigDecimal(28));
-
-        Object resultado = baseFormulaEngine.evaluate(baseFormula, hashMap);
-        System.out.println("Resultado do calculo: " + resultado);
-    }
-
-    public BigDecimal diasTrabalhados() {
+    public BigDecimal diasTrabalhados(HashMap<String, BigDecimal> paramsDiasTrabalhados) {
         BaseFormula diasTrabalhados = new DiasTrabalhadosAjustados();
         diasTrabalhados.setDescricao("Dias trabalhados ajustados");
         diasTrabalhados.setNome("Dias trabalhados ajustados");
         diasTrabalhados.setExpressao(" ((DIAS_TOTAIS_DO_MES - DIAS_AFASTADOS) / DIAS_TOTAIS_DO_MES) * 30 ");
 
-        HashMap<String, Object> paramsDiasTrabalhados = new HashMap<>();
-        paramsDiasTrabalhados.put("DIAS_AFASTADOS", new BigDecimal(19));
-        paramsDiasTrabalhados.put("DIAS_TOTAIS_DO_MES", new BigDecimal(30));
+        Map<String, BigDecimal> paramsDiasTrabalhadosBig = getStringBigDecimalMap(paramsDiasTrabalhados);
 
-
-        Object resultadoDiasTrabalhadosAjustados = baseFormulaEngine.evaluate(diasTrabalhados, paramsDiasTrabalhados);
-        System.out.println("=================================== RESULTADOS ===================================");
-        System.out.println("DIAS TRABALHADOS AJUSTADOS = " + resultadoDiasTrabalhadosAjustados);
+        Object resultadoDiasTrabalhadosAjustados = baseFormulaEngine.evaluate(diasTrabalhados, paramsDiasTrabalhadosBig);
         return new BigDecimal(String.valueOf(resultadoDiasTrabalhadosAjustados));
     }
 
-    public BigDecimal valorDiario() {
+    public BigDecimal valorDiario(HashMap<String, BigDecimal> paramsDiasTrabalhados) {
         ValorDiario valorDiario = new ValorDiario();
         valorDiario.setNome("Valor diário");
         valorDiario.setDescricao("Valor diário");
         valorDiario.setExpressao("(SALARIO_BASE * PERCENTUAL_ACERVO) / 30");
 
-        HashMap<String, Object> mapValorDiario = new HashMap<>();
-        mapValorDiario.put("SALARIO_BASE", new BigDecimal(6350));
-        mapValorDiario.put("PERCENTUAL_ACERVO", new BigDecimal("0.1"));
+        Map<String, BigDecimal> paramsDiasTrabalhadosBig = getStringBigDecimalMap(paramsDiasTrabalhados);
 
-        Object resultadoValorDiario = baseFormulaEngine.evaluate(valorDiario, mapValorDiario);
-        System.out.println("VALOR DIARIO = " + resultadoValorDiario);
+        Object resultadoValorDiario = baseFormulaEngine.evaluate(valorDiario, paramsDiasTrabalhadosBig);
         return new BigDecimal(String.valueOf(resultadoValorDiario));
     }
 
@@ -82,13 +58,20 @@ public class ServiceCalculo {
         valorTotalAcervo.setDescricao("DIAS TRABALHADOS AJUSTADOS");
         valorTotalAcervo.setExpressao(" DIAS_TRABALHADOS_AJUSTADOS * VALOR_DIARIO ");
 
-        HashMap<String, Object> mapValorTotalAcervo = new HashMap<>();
+        HashMap<String, BigDecimal> mapValorTotalAcervo = new HashMap<>();
         mapValorTotalAcervo.put("DIAS_TRABALHADOS_AJUSTADOS", diasTrabalhados);
         mapValorTotalAcervo.put("VALOR_DIARIO", valorDiario);
 
         Object resultadoValorTotalAcervo = baseFormulaEngine.evaluate(valorTotalAcervo, mapValorTotalAcervo);
-        System.out.println("VALOR TOTAL ACERVO = " + resultadoValorTotalAcervo);
-        System.out.println("=================================== RESULTADOS ===================================");
         return new BigDecimal(String.valueOf(resultadoValorTotalAcervo));
+    }
+
+    private static Map<String, BigDecimal> getStringBigDecimalMap(HashMap<String, BigDecimal> paramsDiasTrabalhados) {
+        return paramsDiasTrabalhados.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> new BigDecimal(String.valueOf(e.getValue()))
+                ));
     }
 }

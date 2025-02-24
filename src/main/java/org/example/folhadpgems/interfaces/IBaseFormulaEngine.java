@@ -2,6 +2,7 @@ package org.example.folhadpgems.interfaces;
 
 import org.example.folhadpgems.formulas.BaseFormula;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public interface IBaseFormulaEngine {
@@ -12,5 +13,5 @@ public interface IBaseFormulaEngine {
      * @param variables Variáveis (nome -> valor) necessárias para o cálculo
      * @return O resultado do cálculo. Pode ser deve BigDecimal.
      */
-    Object evaluate(BaseFormula baseFormula, Map<String, Object> variables);
+    Object evaluate(BaseFormula baseFormula, Map<String, BigDecimal> variables);
 }

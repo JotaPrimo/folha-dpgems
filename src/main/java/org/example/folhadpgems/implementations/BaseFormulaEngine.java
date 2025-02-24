@@ -13,7 +13,7 @@ import java.util.Objects;
 public class BaseFormulaEngine implements IBaseFormulaEngine {
 
     @Override
-    public Object evaluate(BaseFormula baseFormula, Map<String, Object> variables) {
+    public Object evaluate(BaseFormula baseFormula, Map<String, BigDecimal> variables) {
 
         Objects.requireNonNull(baseFormula, "Fórmula não definida para cálculo");
         Objects.requireNonNull(variables, "Parâmetros de cálculo no definidos");
